@@ -1,4 +1,5 @@
 ﻿using BlazorChallengeApp.Shared;
+using HerokuCoreAPI.CQRS.Queries.Result;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,16 +18,9 @@ namespace HerokuCoreAPI.Controllers
         [HttpGet("resultids")]
         public async Task<List<int>> IndexAsync(string auth,DateTime start, DateTime end)
         {
-            Console.WriteLine("Auth {0} start {1} end {2}", auth, start.ToString("yyyy-MM-dd"), end.ToString("yyyy-MM-dd"));
-            var rand = new Random();
-            var rtnlist = new List<int>();
 
-            for (int i = 0; i < 100; i++)
-            {
-                rtnlist.Add(rand.Next(1000000));
-            }
-
-            return rtnlist;
+            var response = await mediator.Send(new GetResults.Query(auth, start.ToString("yyy-MM-dd"), end.ToString("yyy-MM-dd")));
+            return response.randomInts;
         }
     }
 }
