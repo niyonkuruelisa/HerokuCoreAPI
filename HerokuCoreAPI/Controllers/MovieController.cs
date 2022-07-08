@@ -15,7 +15,6 @@ namespace BlazorChallengeApp.Server.Controllers
         {
             this.mediator = mediator;
         }
-
         // GET: MovieController
         [HttpGet]
         public async Task<List<Movie>> IndexAsync()
