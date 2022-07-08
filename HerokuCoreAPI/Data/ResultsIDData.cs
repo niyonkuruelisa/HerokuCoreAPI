@@ -5,21 +5,14 @@ namespace HerokuCoreAPI.Data{
     {
         public async Task<List<int>> GetResultsInts()
         {
-            return new List<int>
-                {
-                    67518,
-                    120697,
-                    806613,
-                    762440,
-                    553141,
-                    988079,
-                    939136,
-                    583596,
-                    573055,
-                    939136,
-                    583596,
-                    573055,
-                };
+            var rand = new Random();
+            var rtnlist = new List<int>();
+
+            for (int i = 0; i < 1000; i++)
+            {
+                rtnlist.Add(rand.Next(int.Parse(DateTime.Now.ToString("HHmmss"))));
+            }
+            return rtnlist;
         }
         public async Task<List<int>> GetResultsIntsCache(IMemoryCache memoryCashe)
         {
