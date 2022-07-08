@@ -1,9 +1,15 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace HerokuCoreAPI.CQRS.Queries.Result
 {
     public class GetResults
     {
+        IMemoryCache MemoryCache { get; }
+        public GetResults(IMemoryCache MemoryCache)
+        {
+            this.MemoryCache = MemoryCache;
+        }
         // Data to execute
         public record Query(string auth,string start,string end) : IRequest<Response>;
         // Handler

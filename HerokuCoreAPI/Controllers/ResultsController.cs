@@ -18,7 +18,6 @@ namespace HerokuCoreAPI.Controllers
         [HttpGet("resultids")]
         public async Task<List<int>> IndexAsync(string auth,DateTime start, DateTime end)
         {
-
             var response = await mediator.Send(new GetResults.Query(auth, start.ToString("yyy-MM-dd"), end.ToString("yyy-MM-dd")));
             return response.randomInts;
         }
