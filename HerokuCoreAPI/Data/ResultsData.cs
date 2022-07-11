@@ -20,15 +20,15 @@ namespace HerokuCoreAPI.Data{
                         ProfileName = Guid.NewGuid().ToString(),
                     }
                     );
-
             }
             return rtnlist;
         }
+
         public async Task<List<Models.Result>> GetResultsCache(IMemoryCache memoryCashe)
         {
-            List<Models.Result> output = new List<Models.Result>();
+            _ = new List<Models.Result>();
             //check if there is a cache for the results
-            output = memoryCashe.Get<List<Models.Result>>("ResultsInt");
+            List<Models.Result> output = memoryCashe.Get<List<Models.Result>>("ResultsInt");
             if (output is null)
             {
                 Console.WriteLine("New Data...");
