@@ -21,14 +21,14 @@ namespace HerokuCoreAPI.CQRS.Queries.Result
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
                 
-                ResultsIDData results = new ResultsIDData();
-                List<int> rtnlist = await results.GetResultsIntsCache(MemoryCache);
+                ResultsData results = new ResultsData();
+                List<Models.Result> rtnlist = await results.GetResultsCache(MemoryCache);
 
                 return new Response(randomInts: rtnlist);
             }
         }
 
         // Response
-        public record Response(List<int> randomInts);
+        public record Response(List<Models.Result> randomInts);
     }
 }

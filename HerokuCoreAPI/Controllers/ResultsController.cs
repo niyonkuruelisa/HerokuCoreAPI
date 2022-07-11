@@ -14,9 +14,17 @@ namespace HerokuCoreAPI.Controllers
         {
             this.mediator = mediator;
         }
-        // GET: MovieController
+        // GET: Results IDs
         [HttpGet("resultids")]
-        public async Task<List<int>> IndexAsync(string auth,DateTime start, DateTime end)
+        public async Task<List<Models.Result>> GetResultIds(string auth,DateTime start, DateTime end)
+        {
+            var response = await mediator.Send(new GetResults.Query(auth, start.ToString("yyy-MM-dd"), end.ToString("yyy-MM-dd")));
+            return response.randomInts;
+        }
+
+        // GET: Results
+        [HttpGet("results")]
+        public async Task<List<Models.Result>> GetResults(string auth,DateTime start, DateTime end)
         {
             var response = await mediator.Send(new GetResults.Query(auth, start.ToString("yyy-MM-dd"), end.ToString("yyy-MM-dd")));
             return response.randomInts;
