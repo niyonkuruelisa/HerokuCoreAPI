@@ -9,7 +9,7 @@ namespace HerokuCoreAPI.CQRS.Queries.Result
 
         
         // Data to execute
-        public record Query(string auth,string start,string end) : IRequest<Response>;
+        public record Query(string auth,int resultids) : IRequest<Response>;
         // Handler
         public class Handler : IRequestHandler<Query, Response>
         {
@@ -22,13 +22,15 @@ namespace HerokuCoreAPI.CQRS.Queries.Result
             {
                 
                 ResultsData results = new ResultsData();
-                List<Models.Result> rtnlist = await results.GetResultsCache(MemoryCache);
+                Models.Result result;
+                List< Models.Result> resultsList= await results.GetResultsCache(MemoryCache);
+                result = resultsList.Find(resultTemp => resultTemp.ResultId == request.resultids);
 
-                return new Response(randomInts: rtnlist);
+                return new Response(result: result);
             }
         }
 
         // Response
-        public record Response(List<Models.Result> randomInts);
+        public record Response(Models.Result result);
     }
 }

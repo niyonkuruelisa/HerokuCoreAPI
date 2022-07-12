@@ -1,5 +1,7 @@
 ﻿
 using Microsoft.Extensions.Caching.Memory;
+using static BlazorChallengeApp.Server.CQRS.Queries.Movie.GetAllMovies;
+
 namespace HerokuCoreAPI.Data{
     public class ResultsData
     {
@@ -29,6 +31,8 @@ namespace HerokuCoreAPI.Data{
             _ = new List<Models.Result>();
             //check if there is a cache for the results
             List<Models.Result> output = memoryCashe.Get<List<Models.Result>>("ResultsInt");
+            
+            
             if (output is null)
             {
                 Console.WriteLine("New Data...");

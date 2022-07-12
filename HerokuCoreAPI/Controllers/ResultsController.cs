@@ -16,18 +16,18 @@ namespace HerokuCoreAPI.Controllers
         }
         // GET: Results IDs
         [HttpGet("resultids")]
-        public async Task<List<Models.Result>> GetResultIds(string auth,DateTime start, DateTime end)
+        public async Task<List<int>> GetResultIds(string auth,DateTime start, DateTime end)
         {
-            var response = await mediator.Send(new GetResults.Query(auth, start.ToString("yyy-MM-dd"), end.ToString("yyy-MM-dd")));
-            return response.randomInts;
+            var response = await mediator.Send(new GetResultIds.Query(auth, start.ToString("yyy-MM-dd"), end.ToString("yyy-MM-dd")));
+            return response.resultIdsList ?? null;
         }
 
         // GET: Results
         [HttpGet("results")]
-        public async Task<List<Models.Result>> GetResults(string auth,DateTime start, DateTime end)
+        public async Task<Models.Result> GetResults(string auth,int resultids)
         {
-            var response = await mediator.Send(new GetResults.Query(auth, start.ToString("yyy-MM-dd"), end.ToString("yyy-MM-dd")));
-            return response.randomInts;
+            var response = await mediator.Send(new GetResults.Query(auth, resultids));
+            return response.result ?? null;
         }
     }
 }
