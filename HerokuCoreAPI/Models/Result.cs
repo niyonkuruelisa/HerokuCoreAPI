@@ -52,7 +52,7 @@ namespace HerokuCoreAPI.Models
         [JsonPropertyName("streamName")]
         public string StreamName { get; set; } = string.Empty;
 
-        [JsonPropertyName("isMarket")]
-        public bool IsMarket { get; set; }
+        [JsonPropertyName("isMarked")]
+        public bool isMarked { get; set; } = false;
     }
 }

@@ -24,7 +24,7 @@ namespace HerokuCoreAPI.CQRS.Queries.Result
                 ResultsData results = new ResultsData();
                 Models.Result result;
                 List< Models.Result> resultsList= await results.GetResultsCache(MemoryCache);
-                result = resultsList.Find(resultTemp => resultTemp.ResultId == request.resultids);
+                result = resultsList.Find(resultTemp => resultTemp.ResultId == request.resultids && resultTemp.isMarked == false);
 
                 return new Response(result: result);
             }
