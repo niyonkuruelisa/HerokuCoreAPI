@@ -25,7 +25,7 @@ namespace HerokuCoreAPI.Data{
                         Changed = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss"),
                         StreamId = Guid.NewGuid().ToString(),
                         ProfileName = $"{person.FirstName} {person.LastName}",
-                        ProfileId = person.Id.ToString(),
+                        ProfileId = person.ActorId,
                     }
                     );
             }

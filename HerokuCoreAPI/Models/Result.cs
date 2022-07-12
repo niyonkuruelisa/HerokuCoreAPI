@@ -8,8 +8,7 @@ namespace HerokuCoreAPI.Models
         public int ResultId { get; set; }
 
         [JsonPropertyName("profileId")]
-        public string ProfileId { get; set; } = string.Empty;
-
+        public int ProfileId { get; set; };
         [JsonPropertyName("profileName")]
         public string ProfileName { get; set; } = string.Empty;
 
