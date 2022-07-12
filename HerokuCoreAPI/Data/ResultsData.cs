@@ -5,12 +5,17 @@ using static BlazorChallengeApp.Server.CQRS.Queries.Movie.GetAllMovies;
 namespace HerokuCoreAPI.Data{
     public class ResultsData
     {
-        public async Task<List<Models.Result>> GetResultsInts()
+        public async Task<List<Models.Result>> GetResultsInts(IMemoryCache memoryCashe)
         {
             var rand = new Random();
             var rtnlist = new List<Models.Result>();
 
-            for (int i = 0; i < 100; i++)
+            // Get All People
+            PeopleData results = new PeopleData();
+            List<Models.Person> peopleList = await results.GetPeopleCache(memoryCashe);
+
+            // Create Results based on People
+            foreach (var person in peopleList)
             {
                 rtnlist.Add(
                     new Models.Result
@@ -19,7 +24,8 @@ namespace HerokuCoreAPI.Data{
                         Started = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss"),
                         Changed = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss"),
                         StreamId = Guid.NewGuid().ToString(),
-                        ProfileName = Guid.NewGuid().ToString(),
+                        ProfileName = $"{person.FirstName} {person.LastName}",
+                        ProfileId = person.Id.ToString(),
                     }
                     );
             }
@@ -38,7 +44,7 @@ namespace HerokuCoreAPI.Data{
                 Console.WriteLine("New Data...");
 
                 // if no caches return data then catch data.
-                output = await GetResultsInts();
+                output = await GetResultsInts(memoryCashe);
                 memoryCashe.Set("ResultsInt", output, TimeSpan.FromMinutes(5));
             }
             else
