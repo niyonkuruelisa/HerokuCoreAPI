@@ -23,7 +23,6 @@ namespace HerokuCoreAPI.Controllers
             return response.resultIdsList ?? null;
         }
 
-
         // GET: Results
         [HttpGet("results")]
         public async Task<Models.Result> GetResults(string auth,int resultids)
@@ -31,12 +30,13 @@ namespace HerokuCoreAPI.Controllers
             var response = await mediator.Send(new GetResults.Query(auth, resultids));
             return response.result ?? null;
         }
+
         // Post: change mark of a result
         [HttpPost("results")]
-        public async Task<Models.Result> MarkResult(string auth,int resultids,bool isMarked)
+        public async Task<int> MarkResult(string auth,int resultids,bool isMarked)
         {
             var response = await mediator.Send(new MarkResult.Command(auth, resultids,isMarked));
-            return response.Result ?? null;
+            return response.Result;
         }
     }
 }

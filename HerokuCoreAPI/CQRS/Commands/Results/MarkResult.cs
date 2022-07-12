@@ -24,14 +24,22 @@ namespace HerokuCoreAPI.CQRS.Commands.Results
                 Models.Result result;
                 List<Models.Result> resultsList = await results.GetResultsCache(MemoryCache);
                 // change is marked
-                resultsList.Find(resultTemp => resultTemp.ResultId == request.resultIds).isMarked = request.isMarked;
-                //return the updated object
-                result = resultsList.Find(resultTemp => resultTemp.ResultId == request.resultIds);
+                if (resultsList.Find(resultTemp => resultTemp.ResultId == request.resultIds) != null)
+                {
+                    resultsList.Find(resultTemp => resultTemp.ResultId == request.resultIds).isMarked = request.isMarked;
+                    //return the updated object
+                    result = resultsList.Find(resultTemp => resultTemp.ResultId == request.resultIds);
 
-                return new Response(Result: result);
+                    return new Response(Result: result.ResultId);
+                }
+                else
+                {
+                    return new Response(Result: 0) ;
+                }
+                
             }
         }
         //Response
-        public record Response(Models.Result Result);
+        public record Response(int Result);
     }
 }
