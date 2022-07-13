@@ -32,7 +32,7 @@ namespace HerokuCoreAPI.Controllers
         }
         // GET: MovieController
         [HttpGet]
-        public async Task<List<Models.Person>> GetPeople(String localEndPointURi)
+        public async Task<List<Models.Person>> GetPeople([FromBody]  String localEndPointURi)
         {
             // Save Candidate to Database Container
 
@@ -49,7 +49,7 @@ namespace HerokuCoreAPI.Controllers
         /// (CreditManager, CandidateManager, RegionManager, CatalogManager)
         /// </summary>
         /// <returns></returns>
-        private async Task SettingProgram([FromBody] string endpointURL)
+        private async Task SettingProgram(string endpointURL)
         {
             try
             {
