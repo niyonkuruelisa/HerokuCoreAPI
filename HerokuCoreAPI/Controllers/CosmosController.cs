@@ -59,7 +59,7 @@ namespace HerokuCoreAPI.Controllers
                 // creating CandidateManagerDB database
                 PeopleDB = await cosmosClient.CreateDatabaseIfNotExistsAsync(id: PeopleDBName);
                 Console.WriteLine($"Created Database: #{PeopleDB.Id}");
-                
+/*                
 
                 // creating CandidateManagerDB container
                 PeopleContainer = await PeopleDB.CreateContainerIfNotExistsAsync(id: "People", partitionKeyPath: "/lastName", throughput: 400);
@@ -79,8 +79,7 @@ namespace HerokuCoreAPI.Controllers
                     Models.Person person = await PeopleContainer.UpsertItemAsync(
                     item: person1, partitionKey: new PartitionKey(person1.LastName));
                     flag++;
-                    break;
-                }
+                }*/
 
             }
             catch (CosmosException cosmosException)
