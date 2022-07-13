@@ -54,6 +54,8 @@ namespace HerokuCoreAPI.Controllers
             try
             {
                 Console.WriteLine("Authentication & Connecting a client to CosmosDb...");
+                Console.WriteLine("Primary Key: "+PrimaryKey);
+                Console.WriteLine("EndPoint: "+endpointURL);
                 cosmosClient = new(endpointURL, PrimaryKey, new CosmosClientOptions { ApplicationName = "HerokuCoreAPI" });
                 
                 // creating CandidateManagerDB database
