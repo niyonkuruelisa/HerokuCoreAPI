@@ -23,7 +23,7 @@ namespace HerokuCoreAPI.CQRS.Queries.People
                 PeopleData peopleData = new PeopleData();
                 Models.Person person;
                 List<Models.Person> peopleList = await peopleData.GetPeopleCache(MemoryCache);
-                person = peopleList.Find(personRef => personRef.Id == request.Guid);
+                person = peopleList.Find(personRef => personRef.Id == request.Guid.ToString());
 
                 return new Response(Person: person);
             }

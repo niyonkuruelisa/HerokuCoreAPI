@@ -6,7 +6,7 @@ namespace HerokuCoreAPI.Data
     {
         public async Task<List<Models.Person>> GetPeople()
         {
-            var rand = new Random();
+            
             var rtnlist = new List<Models.Person>();
 
             int flag = 1000;
