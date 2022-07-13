@@ -79,6 +79,7 @@ namespace HerokuCoreAPI.Controllers
                     Models.Person person = await PeopleContainer.UpsertItemAsync(
                     item: person1, partitionKey: new PartitionKey(person1.LastName));
                     flag++;
+                    break;
                 }
 
             }
